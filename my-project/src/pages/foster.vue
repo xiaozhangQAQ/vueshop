@@ -25,8 +25,8 @@
 		          <div class="tab-swiper vux-center">
 		          	<!--mescroll滚动区域的基本结构-->
 				    <div class="mescroll" :id='mescrollnum(index)'>			    					    	
-				            <div class="data-list" :id="datalistnum(index)" v-if= "index == index_l" v-for="(item_l, index_l) in listbox">			      	   
-					      	   	<div v-for="pd in datalistnum1(index_l)">
+				            <div class="data-list" :id="datalistnum(index)" v-if= "index == index_l" v-for="(item_l, index_l) in listbox" :key="index_l">			      	   
+					      	   	<div v-for="(pd,pd_i) in datalistnum1(index_l)" :key="pd_i">
 									<fosterItem :pd_p = 'pd'></fosterItem>
 								</div>
 				      	    </div>																									
@@ -65,7 +65,9 @@
 	import tabnav from '@/components/o2o/ShopTabnav.vue';
 	import mysearch from '@/components/o2o/search.vue';
 	import MeScroll from 'mescroll.js';
-    import 'mescroll.js/mescroll.min.css';
+	import 'mescroll.js/mescroll.min.css';
+	
+	import ajaxAsync from '@/api/ajaxAsync'
 	
 	const list = () => ['全部', '猪产品', '羊产品', '禽蛋产品', '羊产品'];
 	
@@ -183,26 +185,30 @@
 					
 				});
 		   },
-		   getListDataFromNet(curNavIndex,pageNum,pageSize,successCallback){
+		  getListDataFromNet(curNavIndex,pageNum,pageSize,successCallback){
 		   	    var self = this;
-		   	    setTimeout(function () {
-//			    	self.$http.post('/api/user/scroll/demo',{
-//			    		swiperpage:curNavIndex
-//			    	})
-//			        .then(function(response){
-//			        	//请求的列表数据
-//				        let arr = response.data.data;				       
-//				        //如果是第一页需手动制空列表
-//
+		   	    setTimeout(async function () {
+					   let response = await ajaxAsync('/api/user/scroll/demo');
+					   console.log(response.data)
+					   let allpagecount = 4;
+					   successCallback(response.data,allpagecount);
+// 			    	self.$http.post('/api/user/scroll/demo',{
+// 			    		swiperpage:curNavIndex
+// 			    	})
+// 			        .then(function(response){
+// 			        	//请求的列表数据
+// 				        let arr = response.data.data;				       
+// 				        //如果是第一页需手动制空列表
+
 //                      let allpagecount = 4;
-////					    self.dataList = self.dataList.concat(arr);				      
-//				        //数据渲染成功后,隐藏下拉刷新的状态
-//				        //回调
-//		                successCallback(arr,allpagecount);
-//			        }).catch((e)=> {
-//				        //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+// //					    self.dataList = self.dataList.concat(arr);				      
+// 				        //数据渲染成功后,隐藏下拉刷新的状态
+// 				        //回调
+// 		                successCallback(arr,allpagecount);
+// 			        }).catch((e)=> {
+// 				        //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
 //                      self.mescrollArr[self.index].endErr();
-//			        })
+// 			        })
 			    },0)    
 		   }
 		}
@@ -237,4 +243,13 @@
 	    height: 100%;
 	    overflow-y: auto;
 	  }
+    .foster_box .vux-slider>.vux-swiper {
+    overflow: hidden;
+    position: fixed!important;
+    top: 217px;
+    width: 100%;
+    z-index: 100;
+    bottom: 50px;
+    height: auto!important;
+}	  
 </style>

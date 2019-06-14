@@ -99,4 +99,73 @@
 	.has_carts_item .weui-cells{
 		margin-top: 0px;
 	}
+	.has_carts .shop_pro {
+    margin-bottom: 0;
+}
+.shop_pro {
+    width: 100%;
+    /* background-color: #fff; */
+    padding-top: 10px;
+    /* margin-bottom: 15px; */
+}
+.has_carts .shop_pro_item {
+    padding: 0px;
+}
+.shop_pro_leftImg img {
+    width: 80px;
+    height: 80px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.shop_pro_item_title {
+    margin-bottom: 7px;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    word-break: break-all;
+}
+.has_carts .shop_pro_item_title {
+    margin-bottom: 28px;
+    word-break: break-all;
+    padding-right: 23px;
+}
+.shop_pro_item_price .shop_pro_price_money {
+    color: #e30000;
+    font-size: 14px;
+    margin-bottom: 1px;
+    font-weight: 600;
+}
+.has_carts .has_carts_count {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+}
+.has_carts_count .weui-count {
+    /* overflow: hidden; */
+    border: 1px solid #e1e1e1;
+    height: 22px;
+    line-height: 22px;
+}
+.has_carts_count .has_carts_count_jian {
+    border-right: 1px solid #e1e1e1;
+    padding: 0px 10px;
+    display: inline-block;
+}
+.weui-count .weui-count__number {
+    background-color: transparent;
+    font-size: .8rem;
+    border: 0;
+    width: 1.3rem;
+    text-align: center;
+    color: #5f646e;
+}
+.has_carts_count .has_carts_count_add {
+    border-left: 1px solid #e1e1e1;
+    padding: 0px 10px;
+    display: inline-block;
+}
+
 </style>

@@ -7,7 +7,7 @@
         <!--<x-header>aaa</x-header>-->
         
 		<tabbar>
-	       <tabbar-item v-for = 'item in bottomBar' :link='item.link' :selected='item.isselected'>
+	       <tabbar-item v-for = '(item,index) in bottomBar' :link='item.link' :selected='item.isselected' :key="index">
 	        <span slot="icon" class="tabbar_img" :class="item.iconCls"></span>
 	        <span slot="label">{{item.name}}</span>
 	      </tabbar-item>
@@ -36,15 +36,9 @@
 					isselected:true
 				},
 				{
-					name: '认养',
+					name: '商城',
 					iconCls: 'tabbar_img_ry',
 					link: '/foster',
-					isselected:false
-				},
-				{
-					name: '商城',
-					iconCls: 'tabbar_img_shop',
-					link: '/store',
 					isselected:false
 				},
 				{

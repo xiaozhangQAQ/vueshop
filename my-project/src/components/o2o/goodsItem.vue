@@ -1,7 +1,7 @@
 <template>
 	<div class="fosterItem_box">
 		<group class = 'no_margintop'>
-			<div class="" v-for = '(item,index) in shopList' @click = 'todetail'>							
+			<div class="" v-for = '(item,index) in shopList' @click = 'todetail' :key="index">							
 			    <cell-box >	    	
 			       <div class="weui-cell__hd shop_pro_leftImg"><img :src="item.shop_imgsrc"></div>
 			       <div class="weui-cell__bd">
@@ -43,11 +43,11 @@
 		data(){
 			return {
 				 shopList:[
-				   {shop_title:'aa',shop_imgsrc:'./static/images/ji.png',shop_detail:'好吃',shop_price:'145'},
-				   {shop_title:'aa',shop_imgsrc:'./static/images/ji.png',shop_detail:'好吃',shop_price:'145'},
-				   {shop_title:'aa',shop_imgsrc:'./static/images/ji.png',shop_detail:'好吃',shop_price:'145'}
+				   {shop_title:'aa',shop_imgsrc:'../static/images/ji.png',shop_detail:'好吃',shop_price:'145'},
+				   {shop_title:'aa',shop_imgsrc:'../static/images/ji.png',shop_detail:'好吃',shop_price:'145'},
+				   {shop_title:'aa',shop_imgsrc:'../static/images/ji.png',shop_detail:'好吃',shop_price:'145'}
 				 ],
-				 cartimg:'./static/images/tjgw.png'
+				 cartimg:'../static/images/tjgw.png'
 			}
 		},
 //		props:['pd_p'],

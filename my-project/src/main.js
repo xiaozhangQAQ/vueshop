@@ -9,6 +9,7 @@ import jquery from 'jquery'
 import ElementUI from 'element-ui'
 //
 import 'element-ui/lib/theme-chalk/index.css'
+import '../static/weui.min.css'
 
 import store from './store/index.js'
 import axiosp from './api/public.js'

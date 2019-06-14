@@ -2,7 +2,7 @@
 	<div class="addr_box">
 		<div class="addr_box_content" style="">	
 			
-			<div class="weui-flex__item" v-for="item in addrList">
+			<div class="weui-flex__item" v-for="(item,index) in addrList" :key="index">
 		      	<div class="placeholder clear">
 		      		<div class="order_addr_name">
 		      			收货人：<span>{{item.name}}</span>

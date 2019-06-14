@@ -5,16 +5,16 @@
 	    	
 	    <!--è½®æ’­å›¾-->
 		<div class="shop_banner">
-			<swiper loop auto :list="demo06_list"></swiper>	
+			<swiper loop :list="demo06_list"></swiper>	
 		</div>	
 		
-		<!--æ¨èè®¤å…»-->
+		<!-- æ¨èè®¤å…»
        <div class="shop_pro">
        	    <div class="shop_pro_title">
        	    	<h4> æ¨èè®¤å…» <span> RECOMMEND </span></h4>
        	    </div>
-       	    <!--<fosterItem :pd_p = 'pd' v-for="n in 3"></fosterItem>-->	           	    	           	    
-       </div>
+       	    <fosterItem :pd_p = 'pd' v-for="n in 3"></fosterItem>	           	    	           	    
+       </div> -->
 	           	           
 	    <!--  ç²¾å“å•†åŸ         -->
 	        <div class="shop_pro">
@@ -30,12 +30,12 @@
 	        
 	        <!--  æ–°é—»èµ„è®¯         -->
 	        <div class="shop_pro">
-           	    <div class="shop_pro_title">
+           	    <div class="shop_pro_title" @click="send">
            	    	<h4> æ–°é—»èµ„è®¯ <span> NEWS </span></h4>
            	    </div>
            	    
            	    <group>
-				    <cell-box v-for = '(item,index) in newsList'>
+				    <cell-box v-for = '(item,index) in newsList' :key="index">
 				       <div class="weui-cell__hd shop_pro_leftImg shop_pro_item_leftImg"><img :src="item.news_imgsrc"></div>
 				       <div class="weui-cell__bd">
 					      <p class="shop_pro_item_title">{{ item.news_title }}</p>
@@ -62,6 +62,8 @@
 	import mysearch from '@/components/o2o/search.vue';
 	import totop from '@/components/o2o/totop.vue';
 	
+	import ajaxAsync from '@/api/ajaxAsync'
+
 	export default {
 		name:'index',
 		components:{
@@ -80,25 +82,25 @@
 			return {
 				demo06_list:[{
 				  url: 'javascript:',
-				  img: './static/images/banner.png',
+				  img: '../static/images/news.png',
 				  
 				}, {
 				  url: 'javascript:',
-				  img: './static/images/banner.png',
+				  img: '../static/images/jingpin.png',
 				  
 				}, {
 				  url: 'javascript:',
-				  img: './static/images/banner.png',
+				  img: '../static/images/news.png',
 				  
 				}, {
 				  url: 'javascript:',
-				  img: './static/images/banner.png',
+				  img: '../static/images/jingpin.png',
 				  
 				}],
 				 newsList:[
-				   {news_title:'æ•™ä½ å››æ‹›å¥åº·åƒé¸¡è‚‰',news_imgsrc:'./static/images/news1.png',news_detail:'è‡ªç”±æ•£å…»ï¼Œæˆå°±éå‡¡å“è´¨å•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šsadfgasd',news_date:1},
-				   {news_title:'é¸¡è›‹æ€ä¹ˆåšæœ€è¥å…»',news_imgsrc:'./static/images/news2.png',news_detail:'è‡ªç”±æ•£å…»ï¼Œæˆå°±éå‡¡å“è´¨',news_date:2},
-				   {news_title:'é¸¡è›‹æ€ä¹ˆåšå¥½åƒ',news_imgsrc:'./static/images/news3.png',news_detail:'è‡ªç”±æ•£å…»ï¼Œæˆå°±éå‡¡å“è´¨',news_date:3}
+				   {news_title:'æ•™ä½ å››æ‹›å¥åº·åƒé¸¡è‚‰',news_imgsrc:'../static/images/news1.png',news_detail:'è‡ªç”±æ•£å…»ï¼Œæˆå°±éå‡¡å“è´¨å•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šå•Šsadfgasd',news_date:1},
+				   {news_title:'é¸¡è›‹æ€ä¹ˆåšæœ€è¥å…»',news_imgsrc:'../static/images/news2.png',news_detail:'è‡ªç”±æ•£å…»ï¼Œæˆå°±éå‡¡å“è´¨',news_date:2},
+				   {news_title:'é¸¡è›‹æ€ä¹ˆåšå¥½åƒ',news_imgsrc:'../static/images/news3.png',news_detail:'è‡ªç”±æ•£å…»ï¼Œæˆå°±éå‡¡å“è´¨',news_date:3}
 				 ],
 				 transitionName: 'slide-right',
 				 noData: '',
@@ -113,6 +115,10 @@
 			},
 			searchval(a){
 				
+			},
+			async send(){
+				let response = await ajaxAsync('/api/data',{'a':1});
+               console.log(response); 
 			}
 		},
 		mounted(){
@@ -137,24 +143,11 @@
 //              console.log(e)
 //	        })
             this.$http.fetchGet ('/api/data')
-		},
-//		 watch: {
-//		    '$route' (to, from) {
-//		 
-//		      const toDepth = to.path.split('/').length;
-//		      const fromDepth = from.path.split('/').length;
-//		      if(toDepth == fromDepth){
-//		      	this.transitionName = '';
-//		      	return;
-//		      }
-//		      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
-//		      console.log(this.transitionName)
-//		    }
-//		}
+		}
 	}
 </script>
 
-<style>
+<style scoped>
 	.pro_box{
 		display: -webkit-box;
 	    display: -ms-flexbox;
@@ -166,10 +159,11 @@
 	}
 	.shop_box{
 		/*background-color: #fff;*/
-		position: relative;
-	    height: 100%;
-	    padding-bottom: 45px;
-	    overflow: hidden;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		bottom: 50px;
+		overflow: auto;
 	}
 	.shop_banner{
 		padding: 10px;
@@ -302,10 +296,5 @@
 	.shop_pro_item_price .shop_pro_price_money {
 	    color: #e30000;
 	    font-size: 14px;
-	 ğ
-¨+àÏ¯Ë-Ìª¼òq-ù¨y•²¢8¿X…OrfPìoQ¿]µ¦£…lU³‰‡%´‹Š˜Ürñ«>ñĞî~×Dhoèœuë5ByÒ ÎÏ1ú “!ÜÎ/µ¯˜£Œc<ÌS¹³äRú~(M E¦]¿Ê™Î˜iyN›è´4Éì›Ûgf€ŠĞUÚ”ïgº­K®%)ş5¬å}›aÓBŞÜóÊ£œ5¾=Ö–¬ó"EÃ E­Ñ0Ìh(×rB•Ç¨Ş A¨æ*º!².Azâ%ˆÏ!ìÉªŠçêtáÅ”Ja8%£„ õ\G]l2äÙQT/xhº%×l_U=ÂLŒÌ È¡Ö¯ÉW‘áG³Æë°W îÑŠ©štÜÈåpš¢ô^N2åÁÇÕjî ÆëeÕöR,=‚’g!@ò ´¯)‡àeÕr±¹õfõy²1˜Âì¾¯¾LæÍ´v¢«GRÄÚ=Ÿ/÷r.mŸç!èE=‡‡V 3¨*•öJ¯rèdIíoğv•m¦pÌÀxóÆ£-' õn%ÖÂß9Ñ‘¾L½í±ıâà«6·rLoĞv)`n©Áœğ»R2§y‰’Õéb2æÿÑÿÚÙ×A»`áÌ“Æ¾"‘Ü>PìÇ“
-*[•ÓZdpfttæ@pØDfÆÄ_Œ¬+t5É´Æ)	¯ÅT‹/ƒ5†:`Hœ(É	xOƒe”§›ç1$Ìy’ë9g7…9;ÊÒ”,ºÉ*v³í ÀøÍiŞµ(³7.¾¿TâtLûzDRF‘ÆMŒ”¤²`tµqJGè-
-eGßHhWÊñõâŸ²”N"£ÑËT¸ŞĞVŞóS“¢4;–¼»ßvI”~Ëè¡êfKÍ¡óm\D@:w–Ù0Kç¢Ci+7»8Ø®âåÑ<¯wfüR±µQæÔƒ{åJ™i}ÚŒ/Rƒ4¥´¶A<wØ™„àãñ¤x;uó¾iÌ÷çZår—h/…Š(ÅINø-v)5áº³;
-éšŒ>€)UlÚküvÆ°Y±«zÌ(øiöVO$â²€—‘f²€–bwk÷Èšé¦HĞˆ*p!ÄIï^ÆÎÁú²ïöƒ¤x5˜¶Ã&d5Ş»äÒ©Œ¾‹ÿRbœXá³-ÎcÙ®ûOğuö²›_#t>.¦Ù ˜.%éìËk‹(sÀ%EA·<ís»ù0†Ík÷Eu
-úæQµóâŞZ¥[ğZÚ‚Ê¬?«„/÷(JI†˜¶|,ñ^¨Ñ~âÔBJUÀÒä^@%¦nà|7çüäªEíe96½Óàd,SŞ¼µp‹Ö¬~	ßI®C/ ÙDÊµàØ6y,‚>o·šKQ`IªœSš¢Î*C[MÖo:ÕV	oÏd
-¯Mã¸ÄªW³&~ d2<?µqXËÕ¯ÃÑh™{ø9	¾|^2.ü­¨0m$HŠ$Æ¶q(Äv:æºaïx,s±Í˜PN²öm`QÁ 	;İ«bˆÄ?
+	}
+</style>	
